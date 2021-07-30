@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 var osa = require('osa2')
 
 function getSelectedPhotoId() {
+
   return osa(() => {
     const app = Application("Photos");
     const selectedPhotoId = app.selection()[0].id();
@@ -26,24 +27,24 @@ getSelectedPhotoId()
     db.serialize(() => {
       db.each(`
         SELECT ZADDITIONALASSETATTRIBUTES.Z_PK as pkAdd, 
-               ZGENERICASSET.Z_PK as pkAss,
+               ZASSET.Z_PK as pkAss,
                ZORIGINALFILENAME as filename, 
                ZGENERICALBUM.ZTITLE as albumTitle, 
                ZALTERNATEIMPORTIMAGEDATE as fileCreatedDate, 
-               ZGENERICASSET.ZDATECREATED as date, 
+               ZASSET.ZDATECREATED as date, 
                ZGENERICALBUM.ZTITLE, 
-               ZGENERICASSET.ZKIND, 
-               ZGENERICASSET.ZDURATION, 
-               ZGENERICASSET.ZUNIFORMTYPEIDENTIFIER as videoType,
-               ZGENERICASSET.ZUUID as id
+               ZASSET.ZKIND, 
+               ZASSET.ZDURATION, 
+               ZASSET.ZUNIFORMTYPEIDENTIFIER as videoType,
+               ZASSET.ZUUID as id
         FROM ZADDITIONALASSETATTRIBUTES
-        INNER JOIN ZGENERICASSET
-        ON ZADDITIONALASSETATTRIBUTES.Z_PK = ZGENERICASSET.ZADDITIONALATTRIBUTES
+        INNER JOIN ZASSET
+        ON ZADDITIONALASSETATTRIBUTES.Z_PK = ZASSET.ZADDITIONALATTRIBUTES
         INNER JOIN Z_26ASSETS
-        ON ZGENERICASSET.Z_PK = Z_26ASSETS.Z_34ASSETS
+        ON ZASSET.Z_PK = Z_26ASSETS.Z_3ASSETS
         INNER JOIN ZGENERICALBUM
         ON Z_26ASSETS.Z_26ALBUMS = ZGENERICALBUM.Z_PK
-        WHERE ZGENERICASSET.ZUUID = "${rootId}"
+        WHERE ZASSET.ZUUID = "${rootId}"
         `, (err, row) => {
           if (err) {
             console.error(err.message);
