@@ -1,5 +1,5 @@
 {
-  "name": "photos-date-fixer",
+  "name": "photos-album-finder",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
   "author": "Stefan Barthel",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^7.5.0",
     "jxa": "^2.0.3",
-    "osa2": "^0.2.3",
-    "sqlite3": "^4.2.0"
+    "osa2": "^0.2.3"
   }
 }
